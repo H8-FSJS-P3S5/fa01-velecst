@@ -69,18 +69,45 @@ Fungsi ini akan mengembalikan sebuah object berupa `key` golongan kelas yang ber
  */
 
 function hospitalRoom(listPatients) {
-  // write your code here
-  
+  let result = {};
+
+  let capacity = {
+    I: 1,
+    II: 2,
+    III: 3,
+    IV: 4,
+  };
+
+  for (let i = 0; i < listPatients.length; i++) {
+    let name = listPatients[i][0];
+    let classes = listPatients[i][1];
+
+    if (result[classes] === undefined) {
+      result[classes] = [];
+    }
+
+    let room = result[classes];
+    let lastroom = room[room.length - 1];
+
+    if (lastroom === undefined || lastroom.length === capacity[classes]) {
+      room.push([]);
+      lastroom = room[room.length - 1];
+    }
+    lastroom.push(name);
+  }
+  return result;
 }
 
-console.log(hospitalRoom([
-  ["Dimas", "I"],
-  ["Awtian", "II"],
-  ["Dimitri", "II"],
-  ["Icha", "II"],
-  ["Hardim", "II"],
-  ["Radit", "I"],
-]))
+console.log(
+  hospitalRoom([
+    ["Dimas", "I"],
+    ["Awtian", "II"],
+    ["Dimitri", "II"],
+    ["Icha", "II"],
+    ["Hardim", "II"],
+    ["Radit", "I"],
+  ]),
+);
 /*
 { 
   "I": [['Dimas'], ['Radit']],
@@ -88,15 +115,17 @@ console.log(hospitalRoom([
 }
 */
 
-console.log(hospitalRoom([
-  ["Zaskia", "I"],
-  ["Adhi", "III"],
-  ["Agus", "III"],
-  ["Abu Hanifah", "III"],
-  ["Umi Hani", "I"],
-  ["Umar", "III"],
-  ["Arthamevia", "IV"],
-]))
+console.log(
+  hospitalRoom([
+    ["Zaskia", "I"],
+    ["Adhi", "III"],
+    ["Agus", "III"],
+    ["Abu Hanifah", "III"],
+    ["Umi Hani", "I"],
+    ["Umar", "III"],
+    ["Arthamevia", "IV"],
+  ]),
+);
 /*
 {
   I: [['Zaskia'], ['Umi Hani']],
@@ -105,12 +134,14 @@ console.log(hospitalRoom([
 }
 */
 
-console.log(hospitalRoom([
-  ["Naruto", "IV"],
-  ["Sasuke", "II"],
-  ["Sakura", "I"],
-  ["Kakashi", "III"],
-]))
+console.log(
+  hospitalRoom([
+    ["Naruto", "IV"],
+    ["Sasuke", "II"],
+    ["Sakura", "I"],
+    ["Kakashi", "III"],
+  ]),
+);
 /*
 {
   IV: [['Naruto']],
