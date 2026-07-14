@@ -37,12 +37,34 @@ proses:
 */
 
 function numberCruncher(numbers) {
-  // write your code here
-  
+  let result = [];
+  let total = 0;
+
+  for (let i = 0; i < numbers.length; i++) {
+    let before = 0;
+    let after = 0;
+
+    if (i > 0) {
+      before = numbers[i - 1];
+    }
+
+    if (i < numbers.length - 1) {
+      after = numbers[i + 1];
+    }
+
+    result.push(before + numbers[i] + after);
+  }
+
+  for (let i = 0; i < result.length; i++) {
+    if (result[i] % 2 !== 0) {
+      total += result[i];
+    }
+  }
+  return total;
 }
 
-console.log(numberCruncher([2, 5, 1, 3])) // 16
-console.log(numberCruncher([2, 3, 1, 4, 1, 5, 0, 3])) // 8
-console.log(numberCruncher([3, 6, 8, 9, 1, 2, 3])) // 54
+console.log(numberCruncher([2, 5, 1, 3])); // 16
+console.log(numberCruncher([2, 3, 1, 4, 1, 5, 0, 3])); // 8
+console.log(numberCruncher([3, 6, 8, 9, 1, 2, 3])); // 54
 
 module.exports = numberCruncher;
