@@ -21,15 +21,32 @@ alasan: karena 2, 3, 4 duplikat pada array tersebut
 */
 
 function findDuplicate(numbers) {
-  // write your code here
+  let result = [];
 
+  for (let i = 0; i < numbers.length; i++) {
+    for (let j = i + 1; j < numbers.length; j++) {
+      if (numbers[i] === numbers[j]) {
+        let found = false;
+
+        for (let k = 0; k < result.length; k++) {
+          if (result[k] === numbers[i]) {
+            found = true;
+          }
+        }
+        if (found === false) {
+          result.push(numbers[i]);
+        }
+      }
+    }
+  }
+  return result;
 }
 
 // TEST CASE
-console.log(findDuplicate([1, 2, 3, 4, 5, 6, 7, 8, 9])) // []
-console.log(findDuplicate([1, 2, 3, 4, 2, 3, 4, 5, 6])) // [2, 3, 4]
-console.log(findDuplicate([1, 2, 3, 3, 2, 1])) // [1, 2, 3]
-console.log(findDuplicate([1, 1, 1, 1, 1, 1, 2])) // [1]
-console.log(findDuplicate([])) // []
+console.log(findDuplicate([1, 2, 3, 4, 5, 6, 7, 8, 9])); // []
+console.log(findDuplicate([1, 2, 3, 4, 2, 3, 4, 5, 6])); // [2, 3, 4]
+console.log(findDuplicate([1, 2, 3, 3, 2, 1])); // [1, 2, 3]
+console.log(findDuplicate([1, 1, 1, 1, 1, 1, 2])); // [1]
+console.log(findDuplicate([])); // []
 
 module.exports = findDuplicate;
